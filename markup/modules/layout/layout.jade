@@ -1,0 +1,17 @@
+include ../head/head
+include ../header/header
+include ../footer/footer
+
+doctype html
+html
+  head
+    +head(head.defaults)
+  body.container(ng-app='news-collector')
+    +header()
+
+    ui-view
+
+    .page__footer.row
+      +footer()
+      //- Main scripts. You can replace it, but I recommend you to leave it here
+    script(src='%=staticPrefix=%js/main%=hash=%%=min=%.js')

@@ -1,0 +1,8 @@
+mixin search()
+  .row
+    .col-lg-12
+      form(ng-submit='submit()' ng-controller='searchCtrl' ui-sref="newsList").input-group
+        span.input-group-btn
+          button.btn.btn-default(type='submit')
+            | Найти
+        input.form-control(type='text' ng-model="text")

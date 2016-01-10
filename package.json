@@ -1,0 +1,21 @@
+{
+  "name": "awesome_project",
+  "version": "1.0.0",
+  "description": "Your awesome project description",
+  "main": "gulpfile.js",
+  "directories": {},
+  "dependencies": {
+    "angular": "^1.4.8",
+    "bootstrap-sass": "^3.3.6",
+    "gulp": "^3.9.0",
+    "jquery": "^2.2.0",
+    "jquery-latest": "^1.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "optionalDependencies": {}
+}
