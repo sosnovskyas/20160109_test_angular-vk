@@ -1,23 +1,18 @@
 mixin newsList()
   .row(ng-controller='newsListCtrl')
-    .jumbotron(ng-repeat='item in items')
-      .container
-        .col-lg-4.col-md-4.col-sm-6.col-sx-12(ng-if='item.user') {{item.user.first_name + ' ' + item.user.last_name}}
-        .col-lg-4.col-md-4.col-sm-6.col-sx-12(ng-if='item.group') ГРУППА: {{item.group.name}}
-        .col-lg-4.col-md-4.col-sm-6.col-sx-12(ng-if='item.date') дата: {{ item.date * 1000 | date:'yyyy-MM-dd HH:mm:ss'}}
-        .col-lg-4.col-md-4.col-sm-6.col-sx-12(ng-if='item.likes') likes: {{item.likes.count}}
-        .col-lg-12.col-md-12.col-sm-12.col-sx-12(ng-bind-html='item.text|limitTo:500 |htmls')
-        .col-lg-12.col-md-12.col-sm-12.col-sx-12(ng-if='item.attachment.type === "photo"')
-          .b-carousel
-            .b-carousel-button-left
-            .b-carousel-button-right
-            .h-carousel-wrapper
-              .h-carousel-items
-                .b-carousel-block(ng-repeat='attache in item.attachments' ng-if='attache.type === "photo" && attache.photo.src_small')
-                  a.a-carousel-image-link
-                    img(src='{{attache.photo.src}}')
-
-            //li(ng-repeat='attache in item.attachments' ng-if='attache.type === "photo" && attache.photo.src_small')
-              a
-                img(src='{{attache.photo.src_small}}')
-
+    .col-sm-6.col-md-4(ng-repeat='item in items')
+      .thumbnail
+        .caption
+          h3(ng-if='item.user') {{item.user.first_name + ' ' + item.user.last_name}}
+          h3(ng-if='item.group') ГРУППА: {{item.group.name}}
+          h6(ng-if='!item.empty') likes: {{item.likes.count}}
+          uib-carousel.carousel(ng-if='item.attachment.type === "photo" || item.attachment.type === "doc" ')
+            uib-slide(ng-repeat='attache in item.attachments' ng-if='attache.photo.src' )
+              img(src='{{attache.photo.src}}' ng-click='showImage(attache.photo.src_big)')
+            uib-slide(ng-repeat='attache in item.attachments' ng-if='attache.doc.thumb' )
+              img(src='{{attache.doc.thumb}}' ng-click='showImage(attache.doc.url)')
+          p(ng-bind-html='item.text|limitTo:150 |htmls')
+          p(ng-if='!item.empty')
+            a.btn.btn-success(ng-click='read(item)')  читать новость полностью
+          p(ng-if='item.empty')
+            a.btn.btn-success(ui-sref="search") Искать другие новости

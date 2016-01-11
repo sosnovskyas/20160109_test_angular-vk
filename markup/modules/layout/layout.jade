@@ -1,17 +1,19 @@
 include ../head/head
 include ../header/header
 include ../footer/footer
+include ../popup/popup
 
 doctype html
 html
   head
     +head(head.defaults)
-  body.container(ng-app='news-collector')
+  body(ng-app='news-collector' cz-shortcut-listen="true")
     +header()
 
     ui-view
 
     .page__footer.row
       +footer()
+    +popup()
       //- Main scripts. You can replace it, but I recommend you to leave it here
-    script(src='%=staticPrefix=%js/main%=hash=%%=min=%.js')
+    script(src='/%=staticPrefix=%js/main%=hash=%%=min=%.js')

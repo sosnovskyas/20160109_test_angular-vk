@@ -1,0 +1,16 @@
+.row(ng-controller='newsListCtrl')
+  .col-lg-12.col-md-12.col-sm-12.col-sx-12
+    .thumbnail
+      .caption
+        h3(ng-if='currentNews.user') {{currentNews.user.first_name + ' ' + currentNews.user.last_name}}
+        h3(ng-if='currentNews.group') ГРУППА: {{currentNews.group.name}}
+        uib-carousel.carousel(ng-if='currentNews.attachment.type === "photo" || currentNews.attachment.type === "doc" ')
+          uib-slide(ng-repeat='attache in currentNews.attachments' ng-if='attache.photo.src')
+            img(src='{{attache.photo.src}}' ng-click='showImage(attache.photo.src_big)')
+          uib-slide(ng-repeat='attache in currentNews.attachments' ng-if='attache.doc.thumb' )
+            img(src='{{attache.doc.thumb}}' ng-click='showImage(attache.doc.url)')
+        p(ng-bind-html='currentNews.text|htmls')
+        p
+          a.btn.btn-success(ui-sref="search") Искать другие новости
+
+

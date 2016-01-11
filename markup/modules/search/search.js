@@ -10,7 +10,7 @@
     $scope.submit = function () {
       if ($scope.text){
         //console.log('submit: ', $scope.text);
-
+        sendStat($scope.text);
         VK.Auth.getLoginStatus(function (response) {
             if (response.session) {
               console.log('user: ' + response.session.mid);
